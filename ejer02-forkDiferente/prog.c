@@ -1,6 +1,7 @@
-#include <stdio.h> // PRINTF
-#include <unistd.h> // FORK
-#include <sys/types.h> // pid_t
+#include <stdio.h>      // PRINTF
+#include <unistd.h>     // FORK
+#include <sys/types.h>  // pid_t
+#include <sys/wait.h>   // wait
 
 int main(int argc, char const *argv[])
 {
@@ -13,8 +14,9 @@ int main(int argc, char const *argv[])
         sleep(1);   // el hijo espera un segundo
     } else {
         printf("Soy el padre, mi pid es: %d\n", getpid());
-        pid_t pidFinalizado = wait(NULL);   // el padre espera a que acabe el hijo
-        printf("El hijo con PID: %d finalizó\n", pidFinalizado);
+        int estado = 25;
+        pid_t pidFinalizado = wait(&estado);   // el & indica que imprime en este caso el 25 EXACTO de la variable. El padre espera a que acabe el hijo cuando ponemos wait(NULL)
+        printf("El hijo con PID: %d finalizó con estado%d\n", pidFinalizado, WEXITSTATUS(estado));
         sleep(1);
     }
     printf("Hola, num es: %d\n", num);   
