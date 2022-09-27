@@ -14,12 +14,14 @@ int main(int argc, char const *argv[])
         sleep(1);   // el hijo espera un segundo
     } else {
         printf("Soy el padre, mi pid es: %d\n", getpid());
-        int estado = 25;
+        int estado; // declaro un entero donde el wait guardará información sobre el retorno.
         pid_t pidFinalizado = wait(&estado);   // el & indica que imprime en este caso el 25 EXACTO de la variable. El padre espera a que acabe el hijo cuando ponemos wait(NULL)
-        printf("El hijo con PID: %d finalizó con estado%d\n", pidFinalizado, WEXITSTATUS(estado));
+        printf("El hijo con PID: %d finalizó con estado %d, el 'valor' de esado es %d\n", pidFinalizado, WEXITSTATUS(estado), estado);
+        // el 'valor' de estado no tiene ningún sentido práctico, ya que en todos los bits de 
+        // ese entero se codifica diferentes datos que nos dan información sobre la finalización de ese proceso
         sleep(1);
     }
     printf("Hola, num es: %d\n", num);   
     
-    return 0;
+    return 23;
 }
