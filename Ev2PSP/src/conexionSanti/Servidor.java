@@ -24,7 +24,7 @@ public class Servidor {
 		
 		DataInputStream dis = new DataInputStream(sock.getInputStream());
 		String mensaje = dis.readUTF();
-		while (!mensaje.equals("Ububuebuebue")) {
+		while (!mensaje.equals("Q")) {
 			System.out.println(mensaje);
 			mensaje = dis.readUTF();
 		}
